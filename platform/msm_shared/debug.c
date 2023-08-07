@@ -60,7 +60,6 @@ static void write_dcc(char c)
 	}
 }
 
-#if WITH_DEBUG_LOG_BUF
 
 #ifndef LK_LOG_BUF_SIZE
 #define LK_LOG_BUF_SIZE    (4096) /* align on 4k */
@@ -102,7 +101,6 @@ char* lk_log_getbuf(void) {
 unsigned lk_log_getsize(void) {
     return log.header.size_written;
 }
-#endif /* WITH_DEBUG_LOG_BUF */
 
 void display_fbcon_message(char *str)
 {

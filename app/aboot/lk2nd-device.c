@@ -13,6 +13,35 @@
 struct lk2nd_device lk2nd_dev = {0};
 extern struct board_data board;
 
+
+#if WITH_EXTERNAL_TRANSLATION_TABLE
+#if !defined(MMU_TRANSLATION_TABLE_ADDR)
+#error must set MMU_TRANSLATION_TABLE_ADDR in the make configuration
+#endif
+static uint32_t *tt = (void *)MMU_TRANSLATION_TABLE_ADDR;
+#else
+static uint32_t tt[4096] __ALIGNED(16384);
+#endif
+
+
+void arm_mmu_map_section(addr_t paddr, addr_t vaddr, uint flags)
+{
+        int index;
+
+        index = vaddr / MB;
+
+        tt[index] = (paddr & ~(MB-1)) | (0<<5) | (2<<0) | flags;
+
+        arm_invalidate_tlb();
+}
+
+void arm_mmu_flush(void)
+{
+        arch_clean_cache_range((vaddr_t) &tt, sizeof(tt));
+        dsb();
+        isb();
+}
+
 static void dump_board()
 {
 	unsigned i;

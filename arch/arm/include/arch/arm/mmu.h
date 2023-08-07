@@ -27,6 +27,8 @@
 
 #include <sys/types.h>
 
+void arm_mmu_map_section(addr_t paddr, addr_t vaddr, uint flags);
+void arm_mmu_flush(void);
 #if defined(__cplusplus)
 extern "C" {
 #endif
@@ -112,7 +114,6 @@ typedef enum
 #define MAIR0                  0xee440400
 #define MAIR1                  0xbbaaccff
 #include <mmu.h>
-void arm_mmu_map_entry(mmu_section_t *entry);
 #endif /* LPAE */
 
 #else

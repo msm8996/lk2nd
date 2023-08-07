@@ -29,7 +29,6 @@
 #include <arch/arm/mmu.h>
 #include <platform.h>
 
-#if ARM_WITH_MMU
 
 #define MB (1024*1024)
 
@@ -43,6 +42,8 @@ static uint32_t *tt = (void *)MMU_TRANSLATION_TABLE_ADDR;
 /* the main translation table */
 static uint32_t tt[4096] __ALIGNED(16384);
 #endif
+
+void arm_mmu_map_section(addr_t paddr, addr_t vaddr, uint flags);
 
 void arm_mmu_map_section(addr_t paddr, addr_t vaddr, uint flags)
 {
@@ -111,4 +112,3 @@ void arch_disable_mmu(void)
 	arm_invalidate_tlb();
 }
 
-#endif // ARM_WITH_MMU

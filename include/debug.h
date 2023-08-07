@@ -35,6 +35,10 @@
 extern "C" {
 #endif
 
+char* lk_log_getbuf(void);
+unsigned lk_log_getsize(void);
+
+
 #if defined(DEBUG)
 #define DEBUGLEVEL DEBUG
 #else
