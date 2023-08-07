@@ -1,0 +1,18 @@
+// SPDX-License-Identifier: GPL-2.0-only
+
+/dts-v1/;
+
+/include/ "msm8953.dtsi"
+
+/ {
+	// This is used by the bootloader to find the correct DTB
+	qcom,msm-id = <0xf6 0x30001>;
+	qcom,board-id = <0x08 0x00>;
+	qcom,msm-name = "MSM8996";
+	qcom,pmic-id = <0x20009 0x10013 0x00 0x00>;
+
+	model = "Qualcomm Technologies, Inc. MSM 8996 v3 + PMI8996 MTP";
+	compatible = "qcom,msm8996-mtp", "qcom,msm8996", "qcom,mtp", "lk2nd,device";
+
+	lk2nd,pstore = <0xef000000 0xbf800>;
+};
